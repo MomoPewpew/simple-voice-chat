@@ -5,6 +5,8 @@ import de.maxhenkel.voicechat.VoicechatClient;
 import de.maxhenkel.voicechat.api.Group;
 import de.maxhenkel.voicechat.gui.GroupType;
 import de.maxhenkel.voicechat.gui.tooltips.DisableTooltipSupplier;
+import de.maxhenkel.voicechat.gui.tooltips.GroupbroadcastTooltipSupplier;
+import de.maxhenkel.voicechat.gui.tooltips.GrouplistenTooltipSupplier;
 import de.maxhenkel.voicechat.gui.tooltips.HideGroupHudTooltipSupplier;
 import de.maxhenkel.voicechat.gui.tooltips.MuteTooltipSupplier;
 import de.maxhenkel.voicechat.gui.widgets.ImageButton;
@@ -44,6 +46,8 @@ public class GroupScreen extends ListScreenBase {
     protected ToggleImageButton mute;
     protected ToggleImageButton disable;
     protected ToggleImageButton showHUD;
+    protected ToggleImageButton broadcastToGroups;
+    protected ToggleImageButton listenToGroups;
     protected ImageButton leave;
 
     public GroupScreen(ClientGroup group) {
@@ -82,6 +86,16 @@ public class GroupScreen extends ListScreenBase {
             VoicechatClient.CLIENT_CONFIG.showGroupHUD.set(!VoicechatClient.CLIENT_CONFIG.showGroupHUD.get()).save();
         }, new HideGroupHudTooltipSupplier(this));
         addButton(showHUD);
+
+        broadcastToGroups = new ToggleImageButton(4, guiLeft + 7 + (buttonSize + 3) * 4, buttonY, MICROPHONE, stateManager::isNotBroadcastingToGroups, button -> {
+            stateManager.setBroadcastingToGroups(!stateManager.isBroadcastingToGroups());
+        }, new GroupbroadcastTooltipSupplier(this, stateManager));
+        addButton(broadcastToGroups);
+
+        listenToGroups = new ToggleImageButton(4, guiLeft + 7 + (buttonSize + 3) * 5, buttonY, SPEAKER, stateManager::isNotListeningToGroups, button -> {
+            stateManager.setListeningToGroups(!stateManager.isListeningToGroups());
+        }, new GrouplistenTooltipSupplier(this, stateManager));
+        addButton(listenToGroups);
 
         leave = new ImageButton(3, guiLeft + xSize - buttonSize - 7, buttonY, LEAVE, button -> {
             NetManager.sendToServer(new LeaveGroupPacket());

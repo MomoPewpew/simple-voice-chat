@@ -34,6 +34,8 @@ public class PlayerStateManager implements Listener {
         }
 
         state.setDisabled(packet.isDisabled());
+        state.setListeningToGroup(packet.shouldListenToGroups());
+        state.setBroadcastingToGroup(packet.shouldBroadcastToGroups());
 
         states.put(player.getUniqueId(), state);
 

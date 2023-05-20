@@ -136,7 +136,7 @@ public class ClientPlayerStateManager {
     }
 
     public void syncOwnState() {
-        NetManager.sendToServer(new UpdateStatePacket(isDisabled()));
+        NetManager.sendToServer(new UpdateStatePacket(isDisabled(), isListeningToGroups(), isBroadcastingToGroups()));
         Voicechat.logDebug("Sent own state to server: disabled={}", isDisabled());
     }
 
@@ -161,12 +161,38 @@ public class ClientPlayerStateManager {
         PluginManager.instance().dispatchEvent(VoicechatDisableEvent.class, new VoicechatDisableEventImpl(disabled));
     }
 
+    public void setBroadcastingToGroups(boolean broadcastingToGroups) {
+        VoicechatClient.CLIENT_CONFIG.broadcastingToGroups.set(broadcastingToGroups).save();
+        syncOwnState();
+    }
+
+    public void setListeningToGroups(boolean listeningToGroups) {
+        VoicechatClient.CLIENT_CONFIG.listeningToGroups.set(listeningToGroups).save();
+        syncOwnState();
+    }
+
     public boolean isDisconnected() {
         return disconnected;
     }
 
     public boolean isMuted() {
         return VoicechatClient.CLIENT_CONFIG.muted.get();
+    }
+
+    public boolean isBroadcastingToGroups() {
+        return VoicechatClient.CLIENT_CONFIG.broadcastingToGroups.get();
+    }
+
+    public boolean isNotBroadcastingToGroups() {
+        return !isBroadcastingToGroups();
+    }
+
+    public boolean isListeningToGroups() {
+        return VoicechatClient.CLIENT_CONFIG.listeningToGroups.get();
+    }
+
+    public boolean isNotListeningToGroups() {
+        return !isListeningToGroups();
     }
 
     public void setMuted(boolean muted) {

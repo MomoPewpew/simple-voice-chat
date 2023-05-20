@@ -299,7 +299,7 @@ public class Server extends Thread {
     private void processMicPacket(EntityPlayerMP player, PlayerState state, MicPacket packet) throws Exception {
         if (state.hasGroup()) {
             @Nullable Group group = groupManager.getGroup(state.getGroup());
-            processGroupPacket(state, player, packet);
+            if (state.isBroadcastingToGroup()) processGroupPacket(state, player, packet);
             if (group == null || group.isOpen()) {
                 processProximityPacket(state, player, packet);
             }
@@ -318,6 +318,9 @@ public class Server extends Thread {
             if (!groupId.equals(state.getGroup())) {
                 continue;
             }
+
+            if (!state.isListeningToGroup()) return;
+
             if (senderState.getUuid().equals(state.getUuid())) {
                 continue;
             }

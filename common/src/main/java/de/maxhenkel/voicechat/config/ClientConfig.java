@@ -22,6 +22,8 @@ public class ClientConfig {
     public ConfigEntry<String> speaker;
     public ConfigEntry<Boolean> muted;
     public ConfigEntry<Boolean> disabled;
+    public ConfigEntry<Boolean> listeningToGroups;
+    public ConfigEntry<Boolean> broadcastingToGroups;
     public ConfigEntry<Boolean> hideIcons;
     public ConfigEntry<Boolean> showGroupHUD;
     public ConfigEntry<Boolean> showOwnGroupIcon;
@@ -98,6 +100,14 @@ public class ClientConfig {
         disabled = builder
                 .booleanEntry("disabled", false,
                         "If the voice chat is disabled (sound and microphone off)"
+                );
+        listeningToGroups = builder
+                .booleanEntry("Listening To Groups", false,
+                        "Whether you can hear your group members no matter the distance"
+                );
+        broadcastingToGroups = builder
+                .booleanEntry("Broadcasting To Groups", false,
+                        "Whether your group members can hear you no matter the distance"
                 );
         hideIcons = builder
                 .booleanEntry("hide_icons", false,

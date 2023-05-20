@@ -11,6 +11,8 @@ public class PlayerState {
     private String name;
     private boolean disabled;
     private boolean disconnected;
+    private boolean broadcastingToGroup = true;
+    private boolean listeningToGroup = true;
     @Nullable
     private UUID group;
 
@@ -66,6 +68,22 @@ public class PlayerState {
         return group != null;
     }
 
+	public boolean isBroadcastingToGroup() {
+		return broadcastingToGroup;
+	}
+
+	public void setBroadcastingToGroup(boolean broadcastingToGroup) {
+		this.broadcastingToGroup = broadcastingToGroup;
+	}
+
+	public boolean isListeningToGroup() {
+		return listeningToGroup;
+	}
+
+	public void setListeningToGroup(boolean listeningToGroup) {
+		this.listeningToGroup = listeningToGroup;
+	}
+
     @Override
     public String toString() {
         return "{" +
@@ -74,6 +92,8 @@ public class PlayerState {
                 ", uuid=" + uuid +
                 ", name=" + name +
                 ", group=" + group +
+                ", broadcastingToGroup=" + broadcastingToGroup +
+                ", listeningToGroup=" + listeningToGroup +
                 '}';
     }
 
@@ -84,6 +104,9 @@ public class PlayerState {
         String name = buf.readUtf(32767);
 
         PlayerState state = new PlayerState(uuid, name, disabled, disconnected);
+
+        state.setBroadcastingToGroup(buf.readBoolean());
+        state.setListeningToGroup(buf.readBoolean());
 
         if (buf.readBoolean()) {
             state.setGroup(buf.readUUID());
@@ -97,6 +120,10 @@ public class PlayerState {
         buf.writeBoolean(disconnected);
         buf.writeUUID(uuid);
         buf.writeUtf(name);
+
+        buf.writeBoolean(broadcastingToGroup);
+        buf.writeBoolean(listeningToGroup);
+
         buf.writeBoolean(hasGroup());
         if (hasGroup()) {
             buf.writeUUID(group);
