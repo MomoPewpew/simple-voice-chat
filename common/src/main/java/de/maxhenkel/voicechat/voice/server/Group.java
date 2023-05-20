@@ -23,7 +23,7 @@ public class Group {
     }
 
     public Group(UUID id, String name, @Nullable String password, boolean persistent) {
-        this(id, name, password, persistent, de.maxhenkel.voicechat.api.Group.Type.NORMAL);
+        this(id, name, password, persistent, de.maxhenkel.voicechat.api.Group.Type.OPEN);
     }
 
     public Group(UUID id, String name, @Nullable String password) {
