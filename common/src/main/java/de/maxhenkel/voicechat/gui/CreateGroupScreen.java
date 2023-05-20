@@ -31,7 +31,7 @@ public class CreateGroupScreen extends VoiceChatScreenBase {
 
     public CreateGroupScreen() {
         super(TITLE, 195, 124);
-        groupType = GroupType.NORMAL;
+        groupType = GroupType.OPEN;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class CreateGroupScreen extends VoiceChatScreenBase {
                 displayString = GROUP_TYPE.getUnformattedComponentText() + ": " + groupType.getTranslation().getUnformattedComponentText();
             }
         };
-        addButton(groupTypeButton);
+        //addButton(groupTypeButton);
 
         createGroup = new ButtonBase(3, guiLeft + 6, guiTop + ySize - 27, xSize - 12, 20, CREATE) {
             @Override
