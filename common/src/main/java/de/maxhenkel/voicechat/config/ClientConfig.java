@@ -102,11 +102,11 @@ public class ClientConfig {
                         "If the voice chat is disabled (sound and microphone off)"
                 );
         listeningToGroups = builder
-                .booleanEntry("Listening To Groups", false,
+                .booleanEntry("listening_to_groups", true,
                         "Whether you can hear your group members no matter the distance"
                 );
         broadcastingToGroups = builder
-                .booleanEntry("Broadcasting To Groups", false,
+                .booleanEntry("broadcasting_to_groups", true,
                         "Whether your group members can hear you no matter the distance"
                 );
         hideIcons = builder

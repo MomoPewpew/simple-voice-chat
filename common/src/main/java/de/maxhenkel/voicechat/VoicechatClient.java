@@ -31,6 +31,8 @@ public abstract class VoicechatClient {
     public void initializeConfigs() {
         fixVolumeConfig();
         CLIENT_CONFIG = ConfigBuilder.build(Voicechat.getModConfigFolder().resolve("voicechat-client.properties"), true, ClientConfig::new);
+        CLIENT_CONFIG.broadcastingToGroups.set(true).save();
+        CLIENT_CONFIG.listeningToGroups.set(true).save();
         VOLUME_CONFIG = new VolumeConfig(Voicechat.getModConfigFolder().resolve("voicechat-volumes.properties"));
         USERNAME_CACHE = new UsernameCache(Voicechat.getModConfigFolder().resolve("username-cache.json").toFile());
     }
