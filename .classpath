@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="forge/src/main/java"/>
+	<classpathentry kind="src" path="bukkit/src/main/resources"/>
+	<classpathentry kind="src" path="bukkit/src/main/java"/>
+	<classpathentry kind="src" path="forge/src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="E:/Users/ilike/workspace/simple-voice-chat/libs/forge-1.12.2-14.23.5.2859_mapped_snapshot_20171003-1.12.jar"/>
+	<classpathentry kind="lib" path="E:/Users/ilike/workspace/simple-voice-chat/libs/craftbukkit-1.19.4-R0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="E:/Users/ilike/workspace/simple-voice-chat/libs/netty-all-4.1.9.Final.jar"/>
+	<classpathentry kind="lib" path="E:/Users/ilike/workspace/simple-voice-chat/libs/log4j-api-2.19.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

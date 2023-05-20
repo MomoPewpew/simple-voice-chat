@@ -45,6 +45,9 @@ sourceSets {
 dependencies {
     implementation 'com.google.code.findbugs:jsr305:3.0.2'
     implementation "org.bukkit:craftbukkit:${bukkit_version}"
+	implementation "io.netty:netty:all-4.1.9.Final"
+	implementation "io.netty:netty:all-4.1.9.Final"
+	implementation "org.apache:log4j:api-2.19.0"
 
     implementation "net.kyori:adventure-api:${adventure_api_version}"
     shadow "net.kyori:adventure-api:${adventure_api_version}"
@@ -88,6 +91,10 @@ repositories {
     maven { url = 'https://maven.maxhenkel.de/repository/public' }
     maven { url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
     maven { url = 'https://repo.viaversion.com/' }
+	
+    flatDir {
+        dirs '../libs'
+    }
 }
 
 tasks.register('copyJarToServer') {
